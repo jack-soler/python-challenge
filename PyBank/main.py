@@ -11,11 +11,11 @@ with open(csv_file, 'r') as file:
     header_fields = next(reader)  # Saves header fields and skips the header row
 
     greatest_increase_index = -1
-    profit = []
+    profit = [] #declares empty list
     dates = [] # declares empty list
-    profit_differences = []
-    greatest_increase = 0
-    greatest_decrease = 0
+    profit_differences = [] #declares empty list
+    greatest_increase = 0 #start counter
+    greatest_decrease = 0 #start counter
     for row in reader: # for each row in the file
         dates.append(row[0])  # Date is in the first column of the CSV
         profit.append(row[1]) # Profit is in second column
@@ -25,18 +25,18 @@ with open(csv_file, 'r') as file:
         profit_differences.append(difference)  # Append the difference to the profit_differences list
         if profit[i] - profit[i - 1] > greatest_increase:
             greatest_increase = profit[i] - profit[i - 1]
-            greatest_increase_index = i
+            greatest_increase_index = i #calculates increase
         if profit[i] - profit[i - 1] < greatest_decrease:
             greatest_decrease = profit[i] - profit[i - 1]
-            greatest_decrease_index = i
+            greatest_decrease_index = i #calculates decrease
             
 
 
 # Count the number of unique months
 total_months = len(dates)
-total_profit = sum(int(profit) for profit in profit)
+total_profit = sum(int(profit) for profit in profit) #calculates the total profit
 average_difference = sum(int(profit_differences) for profit_differences in profit_differences)/len(profit_differences)
-average_difference = round(average_difference, 2)
+average_difference = round(average_difference, 2) #calculates and rounds the average difference
 
 print("Financial Analysis")
 print("Total Months:", total_months)
