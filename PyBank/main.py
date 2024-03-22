@@ -1,5 +1,6 @@
 import csv
 import os
+import sys
 
 # Construct the path to the CSV file
 csv_file = os.path.join("/Users", "jacksoler1", "Bootcamp Modules", "python-challenge", "PyBank", "Resources", "budget_data.csv")
@@ -38,9 +39,19 @@ total_profit = sum(int(profit) for profit in profit) #calculates the total profi
 average_difference = sum(int(profit_differences) for profit_differences in profit_differences)/len(profit_differences)
 average_difference = round(average_difference, 2) #calculates and rounds the average difference
 
+sys.stdout = open("budget.txt", "w")
+
 print("Financial Analysis")
 print("Total Months:", total_months)
 print("Total: $", total_profit)
 print("Average Change: $",average_difference)
 print(f'Greatest Increase in Profits: {dates[greatest_increase_index]}, (${greatest_increase})')
 print(f'Greatest Decrease in Profits: {dates[greatest_decrease_index]}, (${greatest_decrease})')
+
+# Close the redirected standard output
+sys.stdout.close()
+
+# Resetting standard output to the console
+sys.stdout = sys.__stdout__
+
+print("Results exported to budget_data.txt")
