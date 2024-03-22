@@ -1,5 +1,6 @@
 import csv
 import os
+import sys
 
 # Construct the path to the CSV file
 csv_file = os.path.join("/Users", "jacksoler1", "Bootcamp Modules", "python-challenge", "PyPoll", "Resources", "election_data.csv")
@@ -39,6 +40,8 @@ percent_ccs = round(percent_ccs, 3)
 percent_dg = round(percent_dg, 3)
 percent_rad = round(percent_rad, 3) #rounds percentages
 
+sys.stdout = open("election_results.txt", "w")
+
 
 print('Election Results')
 print("Total Votes:", total_votes)
@@ -46,3 +49,11 @@ print("Charles Casper Stockham:",percent_ccs, "% (",ccs_count,")")
 print("Diana DeGette:",percent_dg, "% (",dg_count,")")
 print("Raymond Anthony Doane:",percent_rad, "% (",rad_count,")")
 print("Winner:", winner) #prints
+
+# Close the redirected standard output
+sys.stdout.close()
+
+# Resetting standard output to the console
+sys.stdout = sys.__stdout__
+
+print("Results exported to election_results.txt")
